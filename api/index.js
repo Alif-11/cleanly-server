@@ -49,10 +49,13 @@ app.get('/', (req, res) => {
   res.send("CLIENT hit the home page");
 })
 
+// allows you to signup, for both patrons and runners
 app.post("/signup", async (req, res) => {
   console.log(req);
   console.log(req.body);
+  // the password used to sign in
   console.log(req.body.password);
+  // whether or not we are a patron or runner that is signing in
   console.log("parent", req.body.parent);
 
   let data = [];
