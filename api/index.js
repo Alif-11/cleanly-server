@@ -49,6 +49,62 @@ app.get('/', (req, res) => {
   res.send("CLIENT hit the home page");
 })
 
+app.post("/signup", async (req, res) => {
+  console.log(req);
+  console.log(req.body);
+  console.log(req.body.password);
+  console.log("parent", req.body.parent);
+
+  let data = [];
+  if (req.body.parent == "patron") {
+    await PatronsModel.find({ username: req.body.username }).then(bob => {
+      //console.log(bob);
+      data = bob;
+    });
+    console.log("data");
+    console.log(data);
+    if (data.length === 0) { // this is a new signup
+      data = {
+        username: req.body.username,
+        password: req.body.password
+      }
+      const patronSchemaObject = new PatronsModel(data);
+      patronSchemaObject.save();
+    } else {
+      data = [];
+      console.log("This user already exists.")
+    }
+  } else if (req.body.parent == "runner") {
+    await RunnersModel.find({ username: req.body.username }).then(bob => {
+      //console.log(bob);
+      data = bob;
+    });
+    console.log("data");
+    console.log(data);
+    if (data.length === 0) { // this is a new signup
+      data = {
+        username: req.body.username,
+        password: req.body.password
+      }
+      let runnerSchemaObject = new RunnersModel(data);
+      runnerSchemaObject.save();
+    } else {
+      data = [];
+      console.log("This user already exists.")
+    }
+
+  }
+
+  console.log("Ooga");
+  console.log(data);
+
+  res.json({
+    message: "signup endpoint accessed and response",
+    data,
+  });
+
+});
+
 
 app.get("/intake", (req, res) => res.send("How did you get here?"));
 
