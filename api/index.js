@@ -51,10 +51,10 @@ app.get('/', (req, res) => {
 
 // allows you to signup, for both patrons and runners
 app.post("/signup", async (req, res) => {
-  console.log(req);
-  console.log(req.body);
+  console.log(`Here is the request: ${req}. Here is the request body: ${req.body}. Here is the request body password: ${req.body.password}.`);
+
   // the password used to sign in
-  console.log(req.body.password);
+  //console.log(req.body.password);
   // whether or not we are a patron or runner that is signing in
   console.log("parent", req.body.parent);
 
@@ -107,6 +107,13 @@ app.post("/signup", async (req, res) => {
   });
 
 });
+
+
+app.post("/name", (req, res) => {
+  console.log(req);
+  console.log(req.body);
+  res.json({ message: "name endpoint response" });
+})
 
 
 app.get("/intake", (req, res) => res.send("How did you get here?"));
