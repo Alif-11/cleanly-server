@@ -113,7 +113,7 @@ app.post("/name", (req, res) => {
   console.log(req);
   console.log(req.body);
   res.json({ message: "name endpoint response" });
-})
+});
 
 
 app.get("/intake", (req, res) => res.send("How did you get here?"));
