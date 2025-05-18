@@ -9,7 +9,12 @@ const mongoose = require('mongoose')
 // use environment variables
 require('dotenv').config()
 const { DB_URL, SERVER_APP, PORT } = process.env
-console.log(process.env)
+// console.log(process.env); // a giant string of commands
+
+// the connection is reset everytime you call an api command...
+// which makes sense, this is how vercel works.
+// you just want to try using a full express backend.
+
 
 // connect to mongoose
 mongoose.connect("mongodb://localhost/laundra").then(() => {
@@ -110,8 +115,9 @@ app.post("/signup", async (req, res) => {
 
 
 app.post("/name", (req, res) => {
-  console.log(req);
-  console.log(req.body);
+  //console.log(req);
+  //console.log(req.body);
+  console.log(`You have reached the /name endpoint!`);
   res.json({ message: "name endpoint response" });
 });
 
